@@ -1,2 +1,226 @@
-# Auto detect text files and perform LF normalization
-* text=auto
+import React, { useState } from "react";
+
+export default function ResumeCreative() {
+  const [accent, setAccent] = useState("blue");
+  const accents: Record<string, string> = {
+    blue: "from-blue-600 to-cyan-500 border-blue-600",
+    amber: "from-amber-600 to-orange-500 border-amber-600",
+    emerald: "from-emerald-600 to-teal-500 border-emerald-600",
+    violet: "from-violet-600 to-fuchsia-500 border-violet-600",
+  };
+
+  const accentClass = accents[accent];
+
+  return (
+    <div className="w-full min-h-screen bg-zinc-50 text-zinc-900">
+      {/* Print styles */}
+      <style>{`
+        @page { size: Letter; margin: 0.5in; }
+        @media print {
+          .no-print { display: none !important; }
+          .page { box-shadow: none !important; background: white !important; }
+          .pagebreak { page-break-before: always; }
+        }
+      `}</style>
+
+      {/* Toolbar */}
+      <div className="no-print sticky top-0 z-10 flex items-center gap-3 p-3 bg-white/80 backdrop-blur border-b">
+        <span className="text-sm text-zinc-700">Accent</span>
+        <select
+          value={accent}
+          onChange={(e) => setAccent(e.target.value)}
+          className="rounded-md border px-2 py-1 text-sm"
+        >
+          <option value="blue">Blue</option>
+          <option value="amber">Amber</option>
+          <option value="emerald">Emerald</option>
+          <option value="violet">Violet</option>
+        </select>
+        <button
+          onClick={() => window.print()}
+          className="ml-auto rounded-lg border px-3 py-1.5 text-sm hover:bg-zinc-100"
+        >
+          Print / Save as PDF
+        </button>
+      </div>
+
+      {/* Page 1 */}
+      <section className="page mx-auto my-6 max-w-5xl rounded-2xl bg-white shadow-sm ring-1 ring-black/5">
+        {/* Header */}
+        <div className={`relative overflow-hidden rounded-t-2xl bg-gradient-to-r ${accentClass} p-6 text-white`}> 
+          <div className="flex flex-wrap items-end gap-4">
+            <div className="flex-1">
+              <h1 className="text-3xl font-bold tracking-tight">Alexander Lewis</h1>
+              <p className="text-sm/6 opacity-90">
+                Advanced Project Engineer • Capital Projects • Industrial Manufacturing • AI-enabled execution
+              </p>
+            </div>
+            <div className="text-right text-[13px]">
+              <p>Nevada, MO • Open to St. Louis & travel</p>
+              <p>LinkedIn: linkedin.com/in/alexanderlewis</p>
+              <p>Email/Phone upon request</p>
+            </div>
+          </div>
+        </div>
+
+        {/* Summary & Core */}
+        <div className="grid grid-cols-12 gap-6 p-6">
+          <div className="col-span-12">
+            <h2 className="mb-1 text-sm font-semibold uppercase tracking-wider text-zinc-600">Summary</h2>
+            <p className="text-[13.5px] leading-6 text-zinc-800">
+              Project engineer managing <strong>$12M+</strong> annual capital portfolios across ~<strong>65 concurrent projects</strong>.
+              Operates end-to-end: scope, estimates/AFEs, schedule/cost control, vendor & contractor coordination, construction, and commissioning.
+              Uses 3M <strong>internal/approved AI</strong> to speed meeting follow-through and AFE documentation within policy (human-reviewed, no external systems).
+              Known for disciplined risk/change control, decision-ready communication, and schedules that hold through startup.
+            </p>
+          </div>
+
+          <div className="col-span-12">
+            <h2 className="mb-1 text-sm font-semibold uppercase tracking-wider text-zinc-600">Core Competencies</h2>
+            <ul className="grid grid-cols-2 gap-x-8 gap-y-1 text-[13.5px] leading-6">
+              <li>Capital Planning & AFEs</li>
+              <li>Schedule & Cost (EVM)</li>
+              <li>Risk & Change Mgmt</li>
+              <li>Vendor/Contract Negotiation</li>
+              <li>Construction & Startup</li>
+              <li>Permitting & Compliance (OSHA, codes)</li>
+              <li>MS Project, SAP</li>
+              <li>AutoCAD, SolidWorks, Excel/VBA, Python</li>
+              <li>Internal-AI workflows (notes, AFE scaffolds)</li>
+              <li>Decision-ready communication</li>
+            </ul>
+          </div>
+
+          {/* Experience 3M */}
+          <div className="col-span-12">
+            <div className="flex items-baseline justify-between">
+              <h2 className="text-lg font-semibold">3M — Advanced Project Engineer</h2>
+              <span className="text-xs text-zinc-500">Feb 2022 – Present • Nevada, MO</span>
+            </div>
+            <div className="mt-2 grid grid-cols-12 gap-6">
+              <div className="col-span-12 md:col-span-7">
+                <h3 className="mb-1 text-[13px] font-semibold tracking-wide text-zinc-700">Selected Results</h3>
+                <ul className="space-y-1 text-[13.5px] leading-6">
+                  <li>- Directed multi-million-dollar switchgear & feeder renewal adding redundancy and double-digit utility savings.</li>
+                  <li>- Prevented major overspend by securing third-party fire-rating certification; aligned scope with standards & permitting pre-PO.</li>
+                  <li>- Standardized status updates & action tracking; enabled faster decisions and fewer rework cycles across a $12M+ / ~65-project portfolio.</li>
+                </ul>
+                <h3 className="mt-3 mb-1 text-[13px] font-semibold tracking-wide text-zinc-700">Methods & Controls</h3>
+                <ul className="space-y-1 text-[13.5px] leading-6">
+                  <li>- EVM-style progress checks, forecast vs. EAC, constraint removal in weekly look-aheads.</li>
+                  <li>- QA/QC with FAT & SAT, PSSR, commissioning plans, and turnover packages.</li>
+                  <li>- Compliance with SOX/OSHA/permits/corporate standards; work in Class I, Div 1 as required.</li>
+                </ul>
+              </div>
+              <div className="col-span-12 md:col-span-5">
+                <div className={`rounded-xl border p-3 ${accent.includes("blue") ? "border-blue-600/30" : "border-zinc-200"}`}>
+                  <h3 className="mb-1 text-[13px] font-semibold tracking-wide text-zinc-700">AI-enabled workflows (within 3M policy)</h3>
+                  <ul className="space-y-1 text-[13.5px] leading-6">
+                    <li>- Internal-AI-assisted meeting notes & next-step summaries; human-reviewed; no external systems.</li>
+                    <li>- Internal-AI AFE scaffolds (scope, risk register, schedule narrative) from structured inputs; finalized by engineers.</li>
+                    <li>- Prompt/playbook library & review checklists aligned to 3M tooling; coached peers on safe usage.</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Other Experience */}
+          <div className="col-span-12">
+            <div className="flex items-baseline justify-between">
+              <h2 className="text-lg font-semibold">North American Stainless — Cold Mill Process Engineer</h2>
+              <span className="text-xs text-zinc-500">Jul 2020 – Feb 2022 • Ghent, KY</span>
+            </div>
+            <ul className="mt-2 space-y-1 text-[13.5px] leading-6">
+              <li>- Drove CI projects to increase throughput & consistency; partnered with maintenance to improve reliability & supplier quality.</li>
+              <li>- Analyzed variable costs & yield to identify savings; standardized run rules across crews/lines for consistent tracking & uptime.</li>
+            </ul>
+          </div>
+
+          <div className="col-span-12">
+            <div className="flex items-baseline justify-between">
+              <h2 className="text-lg font-semibold">Nucor Steel — Metallurgy/Process Eng. Internships</h2>
+              <span className="text-xs text-zinc-500">2018–2019 • Decatur, AL & Norfolk, NE</span>
+            </div>
+            <ul className="mt-2 space-y-1 text-[13.5px] leading-6">
+              <li>- Automated Python analyses to optimize alloy combinations and reduce waste.</li>
+              <li>- Authored safer sampling procedures; supported risk reviews to cut downtime.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      {/* Page 2 */}
+      <section className="page pagebreak mx-auto my-6 max-w-5xl rounded-2xl bg-white shadow-sm ring-1 ring-black/5">
+        <div className="grid grid-cols-12 gap-6 p-6">
+          <div className="col-span-12">
+            <h2 className="mb-1 text-sm font-semibold uppercase tracking-wider text-zinc-600">Selected Project Highlights (3M)</h2>
+            <div className="grid grid-cols-2 gap-4 text-[13.5px] leading-6">
+              <ul className="space-y-1">
+                <li>- Electrical reliability: MCC replacements, feeder protection coordination; fewer trips & better maintainability.</li>
+                <li>- Power quality: power factor & filter-bank improvements aligned with utility incentives and verified savings.</li>
+                <li>- Controls modernization: VFD upgrades & panel refits to stabilize line speed control and reduce scrap risk.</li>
+                <li>- Safety upgrades: guarding, interlocks, and improved isolation plans with minimal production impact.</li>
+              </ul>
+              <ul className="space-y-1">
+                <li>- Building & fire code: corrected enclosure & penetration ratings; avoided rework and delays.</li>
+                <li>- Facilities improvements: roof/structure/envelope repairs sequenced to limit weather downtime & contractor conflicts.</li>
+                <li>- Vendor management: competitive bids with objective scoring; clarified warranties & scope boundaries to cut total cost.</li>
+                <li>- Outage planning: single-window tie-ins with pre-fab & pre-test; shorter downtime & no hot-work extensions.</li>
+              </ul>
+            </div>
+          </div>
+
+          <div className="col-span-12 md:col-span-7">
+            <h2 className="mb-1 text-sm font-semibold uppercase tracking-wider text-zinc-600">Execution Highlights</h2>
+            <ul className="space-y-1 text-[13.5px] leading-6">
+              <li>- Capital planning: scope narratives, basis-of-estimate, alternatives, contingency drivers, risk exposure.</li>
+              <li>- Procurement: bid packages, weighted evaluations, award justifications; manage RFIs, change orders, submittals.</li>
+              <li>- Controls: spend curves, cash flow forecasts, commitments & actuals in SAP; variance explanations; constraint removal.</li>
+              <li>- Construction/startup: outage & tie-in plans, permits-to-work, isolations & lockouts, QA/QC, commissioning, as-builts.</li>
+            </ul>
+          </div>
+
+          <div className="col-span-12 md:col-span-5">
+            <div className={`rounded-xl border p-4 ${accent.includes("blue") ? "border-blue-600/30" : "border-zinc-200"}`}>
+              <h2 className="mb-1 text-sm font-semibold uppercase tracking-wider text-zinc-600">Tools & Standards</h2>
+              <p className="text-[13.5px] leading-6">
+                MS Project, SAP, AutoCAD, SolidWorks, Excel/VBA, Python. OSHA 29 CFR 1910, NEC, NFPA 70E, applicable building/fire codes, and corporate engineering standards.
+              </p>
+              <h2 className="mt-4 mb-1 text-sm font-semibold uppercase tracking-wider text-zinc-600">Selected AI / Tooling (Personal R&D)</h2>
+              <ul className="space-y-1 text-[13.5px] leading-6">
+                <li>- Project Management App (prototype): AI-assisted task breakdown, milestones, risks, and comms briefs.</li>
+                <li>- Lightweight AI Co-pilot (personal; not used at 3M): intended to structure emails/drawings/field notes into logs (constraints, look-aheads, status).</li>
+                <li>- AFE Assistant (templates): prompt-driven draft scope/risk/schedule sections for engineer review.</li>
+              </ul>
+            </div>
+          </div>
+
+          <div className="col-span-12 md:col-span-7">
+            <h2 className="mb-1 text-sm font-semibold uppercase tracking-wider text-zinc-600">Leadership & Communication</h2>
+            <ul className="space-y-1 text-[13.5px] leading-6">
+              <li>- Lead weekly cross-functional standups; action logs with owners/due dates; escalate blockers with options & impacts.</li>
+              <li>- Decision-ready briefs: concise status, risks, cost/schedule impacts, and recommended actions for leadership.</li>
+              <li>- Coach peers on standard work for AFEs, RFIs, and change orders to drive consistency and reduce rework.</li>
+              <li>- Interface with EHS, maintenance, and operations to align work windows and startup readiness.</li>
+              <li>- Train teams on internal-AI usage & review discipline within 3M policy.</li>
+            </ul>
+          </div>
+
+          <div className="col-span-12 md:col-span-5">
+            <h2 className="mb-1 text-sm font-semibold uppercase tracking-wider text-zinc-600">Education & Certifications</h2>
+            <p className="text-[13.5px] leading-6">
+              B.S., Metallurgical Engineering — Missouri University of Science & Technology (2020). OSHA 30-Hour (2023). PMP (Planned).
+            </p>
+            <div className="mt-4 rounded-lg border p-3 text-[12.5px] text-zinc-600">
+              References available upon request.
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Bottom Padding */}
+      <div className="h-12" />
+    </div>
+  );
+}
